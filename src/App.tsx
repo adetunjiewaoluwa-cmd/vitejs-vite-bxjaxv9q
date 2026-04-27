@@ -290,7 +290,7 @@ export default function TheVoryel() {
       {/* Footer */}
       <footer style={{ padding: "50px 48px", borderTop: `1px solid ${T.border}`, marginTop: 100, textAlign: "center" }}>
         <Logo variant="sm" />
-        <p style={{ fontSize: 12, color: T.faint, marginTop: 20 }}>© 2026 The Voryel · Founded by Adetunji Ewaoluwa Destiny</p>
+        <p style={{ fontSize: 12, color: T.faint, marginTop: 20 }}>© 2026 The Voryel · Founded by Adetunji Ewaoluwa Destiny.</p>
       </footer>
     </div>
   );
