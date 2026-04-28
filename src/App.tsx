@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 
 /**
- * THE VORYEL NETWORK - ORIGINAL 700+ LINE RESTORATION
+ * THE VORYEL NETWORK - FULL SCALE RESTORATION
  * Founder: Adetunji Ewaoluwa Destiny
- * Status: MASTER DATA SYNC | FULL MAROON IMMERSION
+ * Status: ORIGINAL LOGIC REINSTATED
  */
 
 const SUPABASE_URL = "https://zafvajcnwyzjumyklyni.supabase.co";
@@ -21,70 +21,76 @@ const T = {
   goldSolid: "#C9A84C",
   bg: "#080204",
   surf: "rgba(18, 6, 10, 0.98)",
-  border: "rgba(201,168,76,0.25)"
+  border: "rgba(201,168,76,0.3)"
 };
 
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Cinzel:wght@400;700&display=swap');
   
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
   body { 
-    background: ${T.bg}; color: #FAF8F5; font-family: 'Cinzel', serif; 
-    overflow-x: hidden; display: flex; flex-direction: column; align-items: center; 
+    background: ${T.bg}; 
+    color: #FAF8F5; 
+    font-family: 'Cinzel', serif; 
+    overflow-x: hidden;
   }
 
-  .gold-text { background: ${T.gold}; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .gold-text {
+    background: ${T.gold};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-  /* NAV ENGINE */
   .v-nav {
-    position: fixed; top: 0; width: 100%; height: 115px;
+    position: fixed; top: 0; width: 100%; height: 110px;
     display: flex; justify-content: space-between; align-items: center;
     padding: 0 6%; background: rgba(8, 2, 4, 0.98);
     border-bottom: 1px solid ${T.border}; z-index: 1000;
   }
 
-  /* MAROON GRADIENT ENGINE */
-  .hero-spice {
+  .hero-maroon {
     background: linear-gradient(180deg, ${T.burg} 0%, ${T.burgD} 60%, ${T.bg} 100%);
-    width: 100vw; padding: 220px 20px 100px; text-align: center;
+    width: 100vw; padding: 200px 20px 100px; text-align: center;
     display: flex; flex-direction: column; align-items: center;
   }
 
-  .footer-spice {
+  .footer-maroon {
     background: linear-gradient(0deg, ${T.burg} 0%, ${T.burgD} 60%, ${T.bg} 100%);
     width: 100vw; padding: 150px 20px; border-top: 1px solid ${T.border};
-    margin-top: 120px; text-align: center; display: flex; flex-direction: column; align-items: center;
+    margin-top: 100px; text-align: center; display: flex; flex-direction: column; align-items: center;
   }
 
-  /* BUTTONS & INPUTS */
   .v-btn {
     padding: 18px 45px; font-family: 'Cinzel'; font-size: 11px; letter-spacing: 4px;
     text-transform: uppercase; cursor: pointer; transition: 0.4s;
-    border: 1px solid ${T.goldSolid}; background: transparent; color: ${T.goldSolid}; margin: 10px;
+    border: 1px solid ${T.goldSolid}; background: transparent; color: ${T.goldSolid};
+    margin: 10px;
   }
-  .v-btn-fill { background: ${T.goldSolid}; color: black; font-weight: 700; }
+
+  .v-btn-solid { background: ${T.goldSolid}; color: black; font-weight: 700; }
   .v-btn-burg { background: ${T.burg}; color: white; border: none; }
 
   .v-input {
     width: 100%; background: rgba(255,255,255,0.03); border: 1px solid ${T.border};
     padding: 20px; color: white; font-family: 'Cormorant Garamond';
-    font-size: 20px; margin-bottom: 22px; outline: none;
+    font-size: 20px; margin-bottom: 20px; outline: none;
   }
 
-  .accord-box {
+  .accord-container {
     background: rgba(0,0,0,0.4); border: 1px solid ${T.border};
     height: 200px; overflow-y: scroll; padding: 25px; margin-bottom: 30px;
     text-align: left; font-family: 'Cormorant Garamond'; font-size: 16px; line-height: 1.7; color: #AAA;
   }
 
-  .card-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 40px; width: 100%; max-width: 1200px; margin: 80px auto;
-  }
-
   .member-card {
     background: ${T.surf}; border: 1px solid ${T.border};
     padding: 60px 40px; text-align: left; transition: 0.4s;
+  }
+
+  .grid-layout {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px; width: 100%; max-width: 1200px; margin: 80px auto;
   }
 `;
 
@@ -118,36 +124,39 @@ export default function TheVoryel() {
     <div style={{ width: "100%" }}>
       <style>{STYLES}</style>
 
+      {/* HEADER NAV */}
       <nav className="v-nav">
         <div onClick={() => setPage("home")} style={{ cursor: "pointer", textAlign: "center" }}>
           <div style={{ fontSize: 9, color: T.goldSolid, letterSpacing: 8, fontWeight: 700 }}>THE</div>
           <div className="gold-text" style={{ fontSize: 32, fontWeight: 700 }}>VORYEL</div>
         </div>
         <div style={{ display: 'flex', gap: '40px' }}>
-          {["home", "network", "about"].map(p => (
-            <span key={p} onClick={() => setPage(p)} style={{ cursor: 'pointer', fontSize: 10, letterSpacing: 4 }}>{p.toUpperCase()}</span>
-          ))}
+          <span onClick={() => setPage("home")} style={{ cursor: 'pointer', fontSize: 10, letterSpacing: 4 }}>IDENTITY</span>
+          <span onClick={() => setPage("network")} style={{ cursor: 'pointer', fontSize: 10, letterSpacing: 4 }}>NETWORK</span>
         </div>
         <button className="v-btn-burg" style={{ padding: "12px 30px" }} onClick={() => setPage("signup")}>JOIN</button>
       </nav>
 
       <main style={{ width: "100%" }}>
+        
+        {/* TOP MAROON SECTION */}
         {page === "home" && (
-          <section className="hero-spice">
+          <section className="hero-maroon">
             <div style={{ fontSize: 14, color: T.goldSolid, letterSpacing: 12, marginBottom: 20 }}>ESTABLISHED 2026</div>
             <h1 className="gold-text" style={{ fontSize: "clamp(60px, 12vw, 110px)", fontWeight: 700, letterSpacing: "-3px" }}>VORYEL</h1>
             <p style={{ fontFamily: "Cormorant Garamond", fontSize: "42px", fontStyle: "italic", margin: "30px 0" }}>"{QUOTE}"</p>
             <div style={{ display: "flex", gap: "20px" }}>
-              <button className="v-btn v-btn-fill" onClick={() => setPage("signup")}>Join Network</button>
-              <button className="v-btn" onClick={() => setPage("network")}>Collective</button>
+              <button className="v-btn v-btn-solid" onClick={() => setPage("signup")}>Enter Network</button>
+              <button className="v-btn" onClick={() => setPage("network")}>The Collective</button>
             </div>
           </section>
         )}
 
+        {/* DATA-DRIVEN COLLECTIVE */}
         {page === "network" && (
           <div style={{ padding: "160px 20px", textAlign: "center" }}>
             <h2 className="gold-text" style={{ fontSize: 45, marginBottom: 80 }}>THE COLLECTIVE</h2>
-            <div className="card-grid">
+            <div className="grid-layout">
               {members.filter(m => m.role === "freelancer" || !m.role).map(m => (
                 <div key={m.id} className="member-card">
                   <span style={{ color: T.goldSolid, fontSize: 10, letterSpacing: 4 }}>{m.category?.toUpperCase() || "ELITE"}</span>
@@ -160,19 +169,22 @@ export default function TheVoryel() {
           </div>
         )}
 
+        {/* SIGNUP & THE ACCORD */}
         {page === "signup" && (
           <div style={{ padding: "160px 20px", maxWidth: "650px", margin: "0 auto", textAlign: 'center' }}>
             <h2 className="gold-text" style={{ fontSize: 32, marginBottom: 50 }}>SIGN THE ACCORD</h2>
+            
             <div style={{ display: "flex", gap: 10, marginBottom: 30 }}>
               <button onClick={() => setRole("freelancer")} style={{ flex: 1, padding: 18, background: role === "freelancer" ? T.burg : "transparent", color: "white", border: `1px solid ${T.border}`, fontFamily: 'Cinzel' }}>FREELANCER</button>
               <button onClick={() => setRole("client")} style={{ flex: 1, padding: 18, background: role === "client" ? T.burg : "transparent", color: "white", border: `1px solid ${T.border}`, fontFamily: 'Cinzel' }}>CLIENT</button>
             </div>
-            <input className="v-input" placeholder="LEGAL NAME" onChange={e => setForm({...form, name: e.target.value})} />
+
+            <input className="v-input" placeholder="FULL LEGAL NAME" onChange={e => setForm({...form, name: e.target.value})} />
             <input className="v-input" placeholder="GMAIL ADDRESS" onChange={e => setForm({...form, email: e.target.value})} />
-            <input className="v-input" placeholder="CATEGORY" onChange={e => setForm({...form, category: e.target.value})} />
+            <input className="v-input" placeholder="CATEGORY / SKILL" onChange={e => setForm({...form, category: e.target.value})} />
             <textarea className="v-input" placeholder="BIO" rows={4} onChange={e => setForm({...form, bio: e.target.value})} />
             
-            <div className="accord-box">
+            <div className="accord-container">
               <strong style={{color: T.goldSolid}}>THE VORYEL ACCORD</strong><br/><br/>
               1. <strong>Excellence:</strong> You commit to delivering work at the highest possible global standard.<br/><br/>
               2. <strong>Non-Circumvention:</strong> You agree not to bypass the platform for project payments.<br/><br/>
@@ -185,15 +197,16 @@ export default function TheVoryel() {
               <label style={{ fontSize: 12, opacity: 0.8 }}>I SOLEMNLY SIGN THE VORYEL ACCORD.</label>
             </div>
 
-            <button className="v-btn v-btn-fill" style={{ width: "100%", margin: 0 }} onClick={handleJoin} disabled={loading}>
+            <button className="v-btn v-btn-solid" style={{ width: "100%", margin: 0 }} onClick={handleJoin} disabled={loading}>
               {loading ? "TRANSMITTING..." : "ENTER THE NETWORK"}
             </button>
           </div>
         )}
       </main>
 
-      <footer className="footer-spice">
-        <div style={{ cursor: "pointer", textAlign: "center", marginBottom: 40 }}>
+      {/* BOTTOM MAROON FOOTER */}
+      <footer className="footer-maroon">
+        <div style={{ textAlign: "center", marginBottom: 40 }}>
           <div style={{ fontSize: 9, color: T.goldSolid, letterSpacing: 8, fontWeight: 700 }}>THE</div>
           <div className="gold-text" style={{ fontSize: 40, fontWeight: 700 }}>VORYEL</div>
         </div>
@@ -206,4 +219,4 @@ export default function TheVoryel() {
     </div>
   );
 }
-                    
+     
