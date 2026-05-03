@@ -1841,7 +1841,7 @@ function Contact({setPage}) {
             <div style={{textAlign:"center",padding:"40px 0"}}>
               <div style={{marginBottom:16,opacity:.5,display:"flex",justifyContent:"center"}}><Logo size="md"/></div>
               <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:24,color:C.gold,marginBottom:10,fontWeight:300}}>Message Received</div>
-              <pstyle={{fontSize:14,color:C.tx,lineHeight:1.85,fontWeight:300}}>We'll respond within 48 hours.</p>
+              <p style={{fontSize:14,color:C.tx,lineHeight:1.85,fontWeight:300}}>We'll respond within 48 hours.</p>
               <div style={{marginTop:18}}><Btn v="ghost" size="sm" onClick={()=>setSent(false)}>Send Another</Btn></div>
             </div>
           ):(
