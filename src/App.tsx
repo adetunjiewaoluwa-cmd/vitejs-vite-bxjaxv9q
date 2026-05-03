@@ -1766,3 +1766,90 @@ function Terms({setPage}) {
           ["8. Account Suspension & Termination","The Voryel may suspend or terminate accounts that violate these Terms, with or without prior notice. The Voryel reserves the right to remove content or users that compromise the quality, safety, or integrity of the network."],
           ["9. Platform Changes","The Voryel may update, modify, or discontinue features at any time. Future monetization features, pricing, and premium services will be communicated to users in advance. Continued use of the Platform following updates constitutes acceptance of the revised Terms."],
           ["10. Limitation of Liability","To the fullest extent permitted by law, The Voryel shall not be liable for any direct, indirect, incidental, or consequential damages arising from: user-to-user disputes; failed or incomplete project arrangements; financial losses from collaborations; inaccurate us
+           style={{fontSize:14,color:C.tx,lineHeight:1.85,fontWeight:300}}>We'll respond within 48 hours.</p>
+              <div style={{marginTop:18}}><Btn v="ghost" size="sm" onClick={()=>setSent(false)}>Send Another</Btn></div>
+            </div>
+          ):(
+            <>
+              <div style={{fontSize:12,letterSpacing:"0.14em",color:C.gold,marginBottom:18,fontWeight:600}}>SEND A MESSAGE</div>
+              <div style={{display:"flex",flexDirection:"column",gap:13}}>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+                  <Field label="NAME" name="name" value={f.name} onChange={fh} placeholder="Your name"/>
+                  <Field label="EMAIL" name="email" type="email" value={f.email} onChange={fh} placeholder="your@email.com"/>
+                </div>
+                <Field label="SUBJECT" name="subject" type="select" value={f.subject} onChange={fh} options={["Support / Bug Report","Partnership Inquiry","Sponsorship / Advertising","Press / Media","Privacy Request","Other Business Inquiry"]}/>
+                <Field label="MESSAGE" name="message" type="textarea" value={f.message} onChange={fh} placeholder="How can we help?" rows={5}/>
+                <Btn v="gold" full onClick={()=>ok&&setSent(true)} disabled={!ok}>Send Message</Btn>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+      <style>{`#contact-grid{grid-template-columns:1fr 1fr;}@media(max-width:720px){#contact-grid{grid-template-columns:1fr;}}`}</style>
+      <Footer setPage={setPage}/>
+    </div>
+  );
+}
+
+export default function TheVoryel() {
+  const [page,setPage]=useState("home");
+  const [members,setMembers]=useState([]);
+  const [me,setMe]=useState(null);
+  const [loading,setLoading]=useState(true);
+  const [toast,setToast]=useState(null);
+  const [unread,setUnread]=useState(0);
+  const [initialRecipient,setInitialRecipient]=useState(null);
+
+  useEffect(()=>{ injectSEO(); },[]);
+
+  useEffect(()=>{
+    db.profiles.all().then(d=>{if(Array.isArray(d))setMembers(d);}).catch(e=>console.error("[Load]",e)).finally(()=>setLoading(false));
+  },[]);
+
+  useEffect(()=>{try{window.scrollTo({top:0,behavior:"instant"});}catch(e){};},[page]);
+
+  const onAuth=u=>{
+    setMembers(p=>{const ex=p.find(x=>x.id===u.id);return ex?p.map(x=>x.id===u.id?u:x):[u,...p];});
+    setMe(u);
+    setToast({title:"Welcome to The Voryel",body:`Signed in as ${u.name}`});
+  };
+
+  const onLogout=()=>{ setMe(null); setPage("home"); setUnread(0); };
+
+  const onUpdate=u=>{
+    setMembers(p=>p.map(x=>x.id===u.id?u:x));
+    setMe(p=>p?.id===u.id?u:p);
+  };
+
+  const onMessage=member=>{
+    if(!me){ setPage("signup"); return; }
+    setInitialRecipient(member);
+    setPage("messages");
+  };
+
+  const noNav=["login","signup"].includes(page);
+  const msgProps={me,members,setUnread,initialRecipient,setInitialRecipient};
+  const commonProps={setPage,members,loading,me,onMessage};
+
+  return (
+    <div style={{background:C.bg,color:C.white,minHeight:"100vh"}}>
+      <style>{CSS}</style>
+      {!noNav&&<Nav page={page} setPage={setPage} user={me} onLogout={onLogout} unreadCount={unread}/>}
+      {page==="home"            &&<Home {...commonProps}/>}
+      {page==="explore-pro"     &&<ExplorePro {...commonProps}/>}
+      {page==="explore-clients" &&<ExploreClients {...commonProps}/>}
+      {page==="collaborations"  &&<Collaborations setPage={setPage} me={me} setToast={setToast}/>}
+      {page==="opportunities"   &&<Opportunities setPage={setPage} me={me} setToast={setToast}/>}
+      {page==="messages"        &&<Messages {...msgProps}/>}
+      {page==="dashboard"       &&me&&<Dashboard user={me} setPage={setPage} onUpdate={onUpdate} onMessage={onMessage} members={members}/>}
+      {page==="dashboard"       &&!me&&(()=>{setTimeout(()=>setPage("login"),0);return null;})()}
+      {page==="terms"           &&<Terms setPage={setPage}/>}
+      {page==="privacy"         &&<Privacy setPage={setPage}/>}
+      {page==="contact"         &&<Contact setPage={setPage}/>}
+      {page==="login"           &&<Auth mode="login" setPage={setPage} onAuth={onAuth}/>}
+      {page==="signup"          &&<Auth mode="signup" setPage={setPage} onAuth={onAuth}/>}
+      {toast&&<Toast title={toast.title} body={toast.body} type={toast.type||"success"} onDone={()=>setToast(null)}/>}
+    </div>
+  );
+           }
+    
