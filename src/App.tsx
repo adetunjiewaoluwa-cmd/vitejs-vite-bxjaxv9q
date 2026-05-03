@@ -1765,8 +1765,83 @@ function Terms({setPage}) {
           ["7. Content & Intellectual Property","Users retain full ownership of all original content they create and upload. By uploading content, you grant The Voryel a limited, non-exclusive licence to display it for Platform operation. Intellectual property for project deliverables is governed exclusively by the agreement between the relevant Client and Professional."],
           ["8. Account Suspension & Termination","The Voryel may suspend or terminate accounts that violate these Terms, with or without prior notice. The Voryel reserves the right to remove content or users that compromise the quality, safety, or integrity of the network."],
           ["9. Platform Changes","The Voryel may update, modify, or discontinue features at any time. Future monetization features, pricing, and premium services will be communicated to users in advance. Continued use of the Platform following updates constitutes acceptance of the revised Terms."],
-          ["10. Limitation of Liability","To the fullest extent permitted by law, The Voryel shall not be liable for any direct, indirect, incidental, or consequential damages arising from: user-to-user disputes; failed or incomplete project arrangements; financial losses from collaborations; inaccurate us
-           style={{fontSize:14,color:C.tx,lineHeight:1.85,fontWeight:300}}>We'll respond within 48 hours.</p>
+           ["10. Limitation of Liability","To the fullest extent permitted by law, The Voryel shall not be liable for any direct, indirect, incidental, or consequential damages arising from user-to-user disputes, failed project arrangements, financial losses, or platform downtime."],
+          ["11. Contact",`For questions, reports, or legal matters: ${VMAIL}. Do not use this email to hire professionals or negotiate project work. Use the platform's direct messaging system for all professional communications.`],
+        ].map(([title,body])=>(
+          <div key={title} style={{marginBottom:44,paddingBottom:44,borderBottom:`1px solid ${C.b}`}}>
+            <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.35rem",fontWeight:400,color:C.white,marginBottom:12}}>{title}</h2>
+            <p style={{fontSize:14.5,color:C.tx,lineHeight:1.88}}>{body}</p>
+          </div>
+        ))}
+      </div>
+      <Footer setPage={setPage}/>
+    </div>
+  );
+}
+
+function Privacy({setPage}) {
+  return (
+    <div style={{background:C.bg,minHeight:"100vh",paddingTop:60}}>
+      <div style={{background:`linear-gradient(135deg,${C.burgD},${C.bg})`,borderBottom:`1px solid ${C.b}`,padding:"60px 48px 48px",textAlign:"center"}}>
+        <div style={{fontSize:10,letterSpacing:"0.22em",color:C.gold,marginBottom:12,fontWeight:500}}>LEGAL</div>
+        <h1 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(2rem,4.5vw,3.6rem)",fontWeight:300,color:C.white,marginBottom:8}}>Privacy Policy</h1>
+        <Ornament/>
+        <p style={{fontSize:12,letterSpacing:"0.1em",color:C.tx3,fontWeight:500}}>LAST UPDATED: JANUARY 2026</p>
+      </div>
+      <div className="wrap-sm" style={{paddingTop:52,paddingBottom:80}}>
+        {[
+          ["1. Data We Collect","We collect: your name and email address during registration; profile information you choose to provide (bio, skills, portfolio, location, rates, contact preferences); messages sent through The Voryel's internal messaging system; collaboration and opportunity posts you create."],
+          ["2. How We Use Your Data","Your data is used to create and maintain your account, display your profile to other members, power search and discovery features, enable the direct messaging system, and improve The Voryel's features. We do not use your data for advertising targeting by third parties."],
+          ["3. Messaging Privacy","Messages sent through The Voryel's internal messaging system are stored to deliver them and maintain conversation history. We do not read, sell, or share your messages with third parties. Messages may be reviewed in limited cases of reported abuse or legal requirement."],
+          ["4. Data Sharing","We do not sell, rent, or share your personal data with third parties for marketing. Your profile information is publicly visible to other members by design — this is the nature of a professional network."],
+          ["5. Data Retention","Your data is retained for as long as your account is active. You may request deletion by emailing us. We will process deletion requests within a reasonable timeframe."],
+          ["6. Security","We take reasonable technical and organisational measures to protect your data. No internet transmission or storage system is 100% secure."],
+          ["7. Your Rights","You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at "+VMAIL+"."],
+          ["8. Contact","For all privacy-related requests: "+VMAIL+". We aim to respond within 30 days."],
+        ].map(([title,body])=>(
+          <div key={title} style={{marginBottom:44,paddingBottom:44,borderBottom:`1px solid ${C.b}`}}>
+            <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.35rem",fontWeight:400,color:C.white,marginBottom:12}}>{title}</h2>
+            <p style={{fontSize:14.5,color:C.tx,lineHeight:1.88}}>{body}</p>
+          </div>
+        ))}
+      </div>
+      <Footer setPage={setPage}/>
+    </div>
+  );
+}
+
+function Contact({setPage}) {
+  const [f,setF]=useState({name:"",email:"",subject:"",message:""});
+  const [sent,setSent]=useState(false);
+  const fh=e=>setF(p=>({...p,[e.target.name]:e.target.value}));
+  const ok=f.name&&f.email&&f.subject&&f.message;
+  return (
+    <div style={{background:C.bg,minHeight:"100vh",paddingTop:60}}>
+      <div style={{background:`linear-gradient(135deg,${C.burgD},${C.bg})`,borderBottom:`1px solid ${C.b}`,padding:"64px 48px 52px",textAlign:"center"}}>
+        <div style={{fontSize:10,letterSpacing:"0.22em",color:C.gold,marginBottom:12,fontWeight:500}}>GET IN TOUCH</div>
+        <h1 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(2rem,4.5vw,3.6rem)",fontWeight:300,color:C.white,marginBottom:8}}>Contact Us</h1>
+        <Ornament/>
+        <p style={{fontSize:15,color:C.tx,fontWeight:300,maxWidth:440,margin:"0 auto"}}>Support, partnerships, press, and business inquiries only.</p>
+      </div>
+      <div className="wrap" style={{paddingTop:60,paddingBottom:80,display:"grid",gridTemplateColumns:"1fr 1fr",gap:52,alignItems:"start"}} id="contact-grid">
+        <div>
+          <div style={{fontSize:12,fontWeight:600,color:C.white,marginBottom:6}}>Official Email</div>
+          <a href={`mailto:${VMAIL}`} style={{fontSize:16,color:C.gold,display:"block",marginBottom:28}}>{VMAIL}</a>
+          <div style={{fontSize:12,fontWeight:600,color:C.white,marginBottom:6}}>Founder</div>
+          <div style={{fontSize:16,color:C.tx,marginBottom:28,fontWeight:300}}>Adetunji Ewaoluwa Destiny</div>
+          <div style={{fontSize:12,fontWeight:600,color:C.white,marginBottom:6}}>Response Time</div>
+          <div style={{fontSize:15,color:C.tx,marginBottom:28,fontWeight:300}}>Within 48 hours</div>
+          <div style={{background:"rgba(155,34,66,0.1)",border:`1px solid ${C.burg}`,padding:"18px 20px",borderRadius:2,marginTop:8}}>
+            <div style={{fontSize:12,fontWeight:600,color:C.gold,marginBottom:8}}>⚠ IMPORTANT</div>
+            <p style={{fontSize:13.5,color:C.tx,lineHeight:1.78}}>This email is for <strong style={{color:C.white}}>support, partnerships, bug reports, press, and advertising only.</strong><br/><br/>Do <strong style={{color:C.red}}>NOT</strong> use this email to hire professionals or negotiate projects. Use <strong style={{color:C.white}}>The Voryel's direct messaging system</strong> for all professional communications.</p>
+          </div>
+        </div>
+        <div style={{border:`1px solid ${C.b}`,padding:"28px",borderRadius:2}}>
+          {sent?(
+            <div style={{textAlign:"center",padding:"40px 0"}}>
+              <div style={{marginBottom:16,opacity:.5,display:"flex",justifyContent:"center"}}><Logo size="md"/></div>
+              <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:24,color:C.gold,marginBottom:10,fontWeight:300}}>Message Received</div>
+              <pstyle={{fontSize:14,color:C.tx,lineHeight:1.85,fontWeight:300}}>We'll respond within 48 hours.</p>
               <div style={{marginTop:18}}><Btn v="ghost" size="sm" onClick={()=>setSent(false)}>Send Another</Btn></div>
             </div>
           ):(
