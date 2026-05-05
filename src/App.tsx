@@ -13,7 +13,8 @@ const SUPABASE_URL = "https://unpohitxskatvovjowen.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVucG9oaXR4c2thdHZvdmpvd2VuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg0MjcwNjMsImV4cCI6MjA1NDAwMzA2M30.K9Gf6X0-TOfk7N5-o99iO2Y-7S2K9N6L2J9I0-7_S6Y";
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-export default function VoryelMasterBuild() {
+export default function App() {
+
   const [view, setView] = useState('home'); // home, discover, collaborations, profile
   const [loading, setLoading] = useState(false);
 
